@@ -14,13 +14,26 @@ function App() {
     setLoginView((preview) => !preview);
   };
 
+  const handleSetCurrentUser = (
+    userData: { id: number; user_name: string } | null
+  ) => {
+    setUser(userData);
+  };
+
   return (
-    <div className="login-container">
-      {loginView ? (
-        <Login handleLandingPageView={handleLandingPageView} />
-      ) : (
-        <SignUp handleLandingPageView={handleLandingPageView} />
-      )}
+    <div>
+      <h1>All Your Pokémon Games in One Place</h1>
+
+      <div className="login-container">
+        {loginView ? (
+          <Login
+            handleLandingPageView={handleLandingPageView}
+            handleSetCurrentUser={handleSetCurrentUser}
+          />
+        ) : (
+          <SignUp handleLandingPageView={handleLandingPageView} />
+        )}
+      </div>
     </div>
   );
 }

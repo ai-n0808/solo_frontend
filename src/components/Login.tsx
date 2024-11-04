@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 interface FormData {
@@ -34,16 +33,19 @@ const Login: React.FC<LoginProps> = ({
 
   const fetchLogin = async (user_name: string, password: string) => {
     try {
-      const loginResponse = await axios.post(
-        `${apiUrl}/login`,
-        {
-          user_name: user_name,
-          password: password,
+      const loginResponse = await fetch(`${apiUrl}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        { withCredentials: true }
-      );
+        body: JSON.stringify({ user_name, password }),
+      });
 
-      const userData = loginResponse.data;
+      if (!loginResponse.ok) {
+        throw new Error("Failed to login");
+      }
+
+      const userData = await loginResponse.json();
 
       handleSetCurrentUser(userData);
       setGeneralError("");
@@ -53,7 +55,7 @@ const Login: React.FC<LoginProps> = ({
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setUserError("");
     setPasswordError("");
@@ -96,7 +98,7 @@ const Login: React.FC<LoginProps> = ({
             type="password"
             name="password"
             value={formData.password}
-            onchange={handleChange}
+            onChange={handleChange}
           />
           {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
         </div>

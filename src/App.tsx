@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
+
 const apiUrl = import.meta.env.VITE_API_URL;
 
 function App() {

@@ -12,7 +12,7 @@ const AllGames: React.FC<AllGamesProps> = ({
 }) => {
   return (
     <div>
-      <h1>Here's all of games</h1>
+      <h1>Choose your favorite</h1>
       {gamesList.length &&
         gamesList.map((game) => (
           <div onClick={() => handleSelectedGame(game)}>

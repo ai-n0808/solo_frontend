@@ -5,9 +5,14 @@ const apiUrl = import.meta.env.VITE_API_URL;
 interface SingleGameProps {
   selectedGame: GameList | null;
   user: { id: number; user_name: string } | null;
+  handleView: (view: string) => void;
 }
 
-const SingleGame: React.FC<SingleGameProps> = ({ selectedGame, user }) => {
+const SingleGame: React.FC<SingleGameProps> = ({
+  selectedGame,
+  user,
+  handleView,
+}) => {
   const handleFavorite = async () => {
     try {
       const loginResponse = await fetch(`${apiUrl}/favorites`, {
@@ -28,7 +33,8 @@ const SingleGame: React.FC<SingleGameProps> = ({ selectedGame, user }) => {
   return (
     <div>
       <h1>Single game: {selectedGame?.title}</h1>
-      <button onClick={() => handleFavorite()}>Add Favorite</button>
+      <button onClick={() => handleFavorite()}>Add Your Favorite</button>
+      <button onClick={() => handleView("AllGames")}>Back to home</button>
     </div>
   );
 };

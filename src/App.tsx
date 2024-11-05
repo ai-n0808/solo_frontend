@@ -3,7 +3,6 @@ import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import Allgames from "./components/Allgames";
 import SingleGame from "./components/Singlegame";
-import Header from "./components/Header";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -19,7 +18,6 @@ function App() {
   const [user, setUser] = useState<{ id: number; user_name: string } | null>(
     null
   );
-  const [loginView, setLoginView] = useState<boolean>(true);
   const [currentView, setCurrentView] = useState("Login");
   const [gamesList, setGamesList] = useState<GameList[]>([]);
   const [selectedGame, setSelectedGame] = useState<null | GameList>(null);
@@ -75,7 +73,11 @@ function App() {
           />
         )}
         {currentView === "SingleGame" && (
-          <SingleGame selectedGame={selectedGame} user={user} />
+          <SingleGame
+            selectedGame={selectedGame}
+            user={user}
+            handleView={handleView}
+          />
         )}
       </div>
     </>

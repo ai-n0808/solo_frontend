@@ -28,30 +28,25 @@ const Signup: React.FC<SignupProps> = ({ handleLandingPageView }) => {
   };
 
   const fetchSignUp = async (signUpFormData: FormData) => {
-    try {
-      const response = await fetch(`${apiUrl}/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(signUpFormData),
-      });
+    const response = await fetch(`${apiUrl}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signUpFormData),
+    });
 
-      if (!response.ok) {
-        const data = await response.json();
-        if (data.message === "Username is already taken") {
-          setGeneralError(
-            "Username is already taken. Please choose a different one."
-          );
-        } else {
-          setGeneralError("An error occurred. Please try again.");
-        }
+    if (!response.ok) {
+      const data = await response.json();
+      if (data.error === "Registration failed") {
+        setGeneralError(
+          "Username is already taken. Please choose a different one."
+        );
       } else {
-        handleLandingPageView();
+        setGeneralError("An error occurred. Please try again.");
       }
-    } catch (error) {
-      console.error("Sign up failed", error);
-      setGeneralError("An unknown error occurred. Please try again.");
+    } else {
+      handleLandingPageView();
     }
   };
 
@@ -74,7 +69,8 @@ const Signup: React.FC<SignupProps> = ({ handleLandingPageView }) => {
         <div>
           <label>Username: </label>
           <input
-            type="user_name"
+            type="text"
+            name="user_name"
             value={signUpFormData.user_name}
             onChange={handleChange}
           />

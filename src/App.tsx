@@ -23,7 +23,15 @@ function App() {
 
   return (
     <div>
-      <h1>All Your Pokémon Games in One Place</h1>
+      <h1
+        style={{
+          textAlign: "center",
+          position: "absolute",
+          top: "0",
+        }}
+      >
+        All Your Pokémon Games in One Place
+      </h1>
 
       <div className="login-container">
         {loginView ? (

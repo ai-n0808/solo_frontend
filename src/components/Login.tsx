@@ -77,8 +77,30 @@ const Login: React.FC<LoginProps> = ({
 
   return (
     <div>
-      <h1>Log in</h1>
-      <form onSubmit={handleSubmit}>
+      {/* <img
+        src=""
+        style={{
+          width: "100px",
+          height: "auto",
+        }}
+      /> */}
+      <h1
+        style={{
+          textAlign: "center",
+          position: "absolute",
+          left: "45%",
+          top: "30%",
+        }}
+      >
+        Log in
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          position: "absolute",
+          left: "40%",
+        }}
+      >
         <div className="username-form">
           <label>Username: </label>
           <input
@@ -105,7 +127,15 @@ const Login: React.FC<LoginProps> = ({
 
         {generalError && <p style={{ color: "red" }}>{generalError}</p>}
 
-        <button className="login-button" type="submit">
+        <button
+          className="login-button"
+          type="submit"
+          style={{
+            position: "absolute",
+            marginTop: "50px",
+            width: "300px",
+          }}
+        >
           Login
         </button>
 
@@ -114,6 +144,11 @@ const Login: React.FC<LoginProps> = ({
             className="signup-button"
             type="button"
             onClick={handleLandingPageView}
+            style={{
+              position: "absolute",
+              marginTop: "100px",
+              width: "300px",
+            }}
           >
             Create your account here!!
           </button>

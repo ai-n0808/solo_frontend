@@ -64,8 +64,23 @@ const Signup: React.FC<SignupProps> = ({ handleLandingPageView }) => {
 
   return (
     <div>
-      <h1>Sign up</h1>
-      <form onSubmit={handleSubmit}>
+      <h1
+        style={{
+          textAlign: "center",
+          position: "absolute",
+          left: "45%",
+          top: "30%",
+        }}
+      >
+        Sign up
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          position: "absolute",
+          left: "40%",
+        }}
+      >
         <div>
           <label>Username: </label>
           <input
@@ -91,7 +106,16 @@ const Signup: React.FC<SignupProps> = ({ handleLandingPageView }) => {
 
         <span>
           <div className="signup-button">
-            <button type="submit">Create account</button>
+            <button
+              type="submit"
+              style={{
+                position: "absolute",
+                marginTop: "50px",
+                width: "300px",
+              }}
+            >
+              Create account
+            </button>
           </div>
         </span>
       </form>

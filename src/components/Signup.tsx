@@ -7,10 +7,10 @@ interface FormData {
 }
 
 interface SignupProps {
-  handleLandingPageView: () => void;
+  handleView: (view: string) => void;
 }
 
-const Signup: React.FC<SignupProps> = ({ handleLandingPageView }) => {
+const Signup: React.FC<SignupProps> = ({ handleView }) => {
   const [signUpFormData, setSignUpFormData] = useState<FormData>({
     user_name: "",
     password: "",
@@ -46,7 +46,7 @@ const Signup: React.FC<SignupProps> = ({ handleLandingPageView }) => {
         setGeneralError("An error occurred. Please try again.");
       }
     } else {
-      handleLandingPageView();
+      handleView("Login");
     }
   };
 
@@ -64,7 +64,18 @@ const Signup: React.FC<SignupProps> = ({ handleLandingPageView }) => {
 
   return (
     <div>
-      <h1
+      <div>
+        <h1
+          style={{
+            textAlign: "center",
+            position: "absolute",
+            top: "0",
+          }}
+        >
+          All Your Pokémon Games in One Place
+        </h1>
+      </div>
+      <h2
         style={{
           textAlign: "center",
           position: "absolute",
@@ -73,7 +84,7 @@ const Signup: React.FC<SignupProps> = ({ handleLandingPageView }) => {
         }}
       >
         Sign up
-      </h1>
+      </h2>
       <form
         onSubmit={handleSubmit}
         style={{

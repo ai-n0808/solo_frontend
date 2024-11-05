@@ -7,14 +7,11 @@ interface FormData {
 }
 
 interface LoginProps {
-  handleLandingPageView: () => void;
+  handleView: (view: string) => void;
   handleSetCurrentUser: (userData: { id: number; user_name: string }) => void;
 }
 
-const Login: React.FC<LoginProps> = ({
-  handleLandingPageView,
-  handleSetCurrentUser,
-}) => {
+const Login: React.FC<LoginProps> = ({ handleView, handleSetCurrentUser }) => {
   const [formData, setFormData] = useState<FormData>({
     user_name: "",
     password: "",
@@ -84,7 +81,18 @@ const Login: React.FC<LoginProps> = ({
           height: "auto",
         }}
       /> */}
-      <h1
+      <div>
+        <h1
+          style={{
+            textAlign: "center",
+            position: "absolute",
+            top: "0",
+          }}
+        >
+          All Your Pokémon Games in One Place
+        </h1>
+      </div>
+      <h2
         style={{
           textAlign: "center",
           position: "absolute",
@@ -93,7 +101,7 @@ const Login: React.FC<LoginProps> = ({
         }}
       >
         Log in
-      </h1>
+      </h2>
       <form
         onSubmit={handleSubmit}
         style={{
@@ -143,7 +151,7 @@ const Login: React.FC<LoginProps> = ({
           <button
             className="signup-button"
             type="button"
-            onClick={handleLandingPageView}
+            onClick={() => handleView("SignUp")}
             style={{
               position: "absolute",
               marginTop: "100px",

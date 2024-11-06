@@ -3,6 +3,8 @@ import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import Allgames from "./components/Allgames";
 import SingleGame from "./components/Singlegame";
+import Header from "./components/Header";
+import Favorite from "./components/Favorite";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -21,6 +23,7 @@ function App() {
   const [currentView, setCurrentView] = useState("Login");
   const [gamesList, setGamesList] = useState<GameList[]>([]);
   const [selectedGame, setSelectedGame] = useState<null | GameList>(null);
+  const [favorites, setFavorites] = useState<GameList[]>([]);
 
   //Flip the view
   const handleView = (view: string) => {
@@ -42,9 +45,6 @@ function App() {
     if (user) setCurrentView("AllGames");
   }, [user]);
 
-  useEffect(() => {
-    fetchAllGames();
-  }, []);
   const fetchAllGames = async () => {
     try {
       const response = await fetch(`${apiUrl}/games`);
@@ -54,9 +54,33 @@ function App() {
       console.error(error);
     }
   };
+  const fetchFavorites = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/favorites/${user?.id}`);
+      const allFavorite = await response.json();
+      setFavorites(allFavorite);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      fetchAllGames();
+      fetchFavorites();
+    }
+  }, [user]);
+
   return (
     <>
       <div>
+        {currentView === "AllGames" && (
+          <Header
+            user={user}
+            favorites={favorites}
+            handleView={() => handleView("Favorite")}
+          />
+        )}
         {currentView === "Login" && (
           <div className="login-container">
             <Login
@@ -77,6 +101,12 @@ function App() {
             selectedGame={selectedGame}
             user={user}
             handleView={handleView}
+          />
+        )}
+        {currentView === "Favorite" && (
+          <Favorite
+            favorites={favorites}
+            handleView={() => handleView("AllGames")}
           />
         )}
       </div>

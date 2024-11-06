@@ -74,13 +74,6 @@ const Login: React.FC<LoginProps> = ({ handleView, handleSetCurrentUser }) => {
 
   return (
     <div>
-      {/* <img
-        src=""
-        style={{
-          width: "100px",
-          height: "auto",
-        }}
-      /> */}
       <div>
         <h1
           style={{

@@ -7,8 +7,7 @@ interface FavoriteProps {
   handleView: () => void;
 }
 
-const Favorite: React.FC<FavoriteProps> = ({ favorites }) => {
-  console.log(favorites[0].release_date);
+const Favorite: React.FC<FavoriteProps> = ({ favorites, handleView }) => {
   return (
     <div>
       <h2>Your Favorite Games</h2>
@@ -21,9 +20,11 @@ const Favorite: React.FC<FavoriteProps> = ({ favorites }) => {
               Release Date: {moment(game.release_date).format("MMMM Do YYYY")}
             </p>
             <p>Generation: {game.generation}</p>
+            <img src={game.image} />
           </li>
         ))}
       </ul>
+      <button onClick={() => handleView()}>Back to home</button>
     </div>
   );
 };

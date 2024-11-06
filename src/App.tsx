@@ -5,6 +5,7 @@ import Allgames from "./components/Allgames";
 import SingleGame from "./components/Singlegame";
 import Header from "./components/Header";
 import Favorite from "./components/Favorite";
+import Review from "./components/Review";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -14,6 +15,7 @@ export interface GameList {
   platform: string;
   release_date: Date;
   generation: number;
+  image: string;
 }
 
 function App() {
@@ -42,7 +44,11 @@ function App() {
   };
 
   useEffect(() => {
-    if (user) setCurrentView("AllGames");
+    if (user) {
+      setCurrentView("AllGames");
+      fetchAllGames();
+      fetchFavorites();
+    }
   }, [user]);
 
   const fetchAllGames = async () => {
@@ -63,13 +69,6 @@ function App() {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      fetchAllGames();
-      fetchFavorites();
-    }
-  }, [user]);
 
   return (
     <>
@@ -108,6 +107,9 @@ function App() {
             favorites={favorites}
             handleView={() => handleView("AllGames")}
           />
+        )}
+        {currentView === "Review" && (
+          <Review user={user} handleView={handleView} />
         )}
       </div>
     </>

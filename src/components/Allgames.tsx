@@ -12,11 +12,18 @@ const AllGames: React.FC<AllGamesProps> = ({
 }) => {
   return (
     <div>
-      <h1>Choose your favorite</h1>
+      <h1
+        style={{
+          textAlign: "center",
+        }}
+      >
+        Choose your favorite game
+      </h1>
       {gamesList.length &&
         gamesList.map((game) => (
           <div onClick={() => handleSelectedGame(game)}>
             <h2>Game title: {game.title}</h2>
+            <img src={game.image} />
             <span>Platform: {game.platform}</span>
           </div>
         ))}

@@ -33,8 +33,10 @@ const SingleGame: React.FC<SingleGameProps> = ({
   return (
     <div>
       <h1>Single game: {selectedGame?.title}</h1>
+      <img src={selectedGame?.image} />
       <button onClick={() => handleFavorite()}>Add Your Favorite</button>
       <button onClick={() => handleView("AllGames")}>Back to home</button>
+      <button onClick={() => handleView("Review")}>Write your review</button>
     </div>
   );
 };

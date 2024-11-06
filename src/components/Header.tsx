@@ -7,12 +7,28 @@ interface HeaderProps {
   handleView: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ user, favorites, handleView }) => {
+const Header: React.FC<HeaderProps> = ({ user, handleView }) => {
   return (
     <div className="header">
-      <h2>Welcome, {user?.user_name}!</h2>
+      <h2
+        style={{
+          position: "absolute",
+          right: "10%",
+        }}
+      >
+        Welcome, {user?.user_name}!
+      </h2>
 
-      <button onClick={handleView}>View My Favorites</button>
+      <button
+        onClick={handleView}
+        style={{
+          position: "absolute",
+          right: "10%",
+          top: "50%,",
+        }}
+      >
+        View My Favorites
+      </button>
     </div>
   );
 };

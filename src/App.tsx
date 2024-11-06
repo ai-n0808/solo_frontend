@@ -6,6 +6,7 @@ import SingleGame from "./components/Singlegame";
 import Header from "./components/Header";
 import Favorite from "./components/Favorite";
 import Review from "./components/Review";
+import "./App.css";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -70,6 +71,11 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    setUser(null);
+    setCurrentView("Login");
+  };
+
   return (
     <>
       <div>
@@ -78,6 +84,7 @@ function App() {
             user={user}
             favorites={favorites}
             handleView={() => handleView("Favorite")}
+            handleLogout={handleLogout}
           />
         )}
         {currentView === "Login" && (

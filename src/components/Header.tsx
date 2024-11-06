@@ -5,9 +5,10 @@ interface HeaderProps {
   user: { id: number; user_name: string } | null;
   favorites: GameList[];
   handleView: () => void;
+  handleLogout: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ user, handleView }) => {
+const Header: React.FC<HeaderProps> = ({ user, handleView, handleLogout }) => {
   return (
     <div className="header">
       <h2
@@ -29,6 +30,8 @@ const Header: React.FC<HeaderProps> = ({ user, handleView }) => {
       >
         View My Favorites
       </button>
+
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

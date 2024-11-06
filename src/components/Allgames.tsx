@@ -11,7 +11,7 @@ const AllGames: React.FC<AllGamesProps> = ({
   handleSelectedGame,
 }) => {
   return (
-    <div>
+    <div className="main-content">
       <h1
         style={{
           textAlign: "center",
@@ -19,14 +19,19 @@ const AllGames: React.FC<AllGamesProps> = ({
       >
         Choose your favorite game
       </h1>
-      {gamesList.length &&
-        gamesList.map((game) => (
-          <div onClick={() => handleSelectedGame(game)}>
-            <h2>Game title: {game.title}</h2>
-            <img src={game.image} />
+      <div className="games-gallery">
+        {gamesList.map((game) => (
+          <div
+            key={game.id}
+            className="game-card"
+            onClick={() => handleSelectedGame(game)}
+          >
+            <img src={game.image} alt={`Cover of ${game.title}`} />
+            <h2>{game.title}</h2>
             <span>Platform: {game.platform}</span>
           </div>
         ))}
+      </div>
     </div>
   );
 };

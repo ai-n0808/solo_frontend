@@ -19,19 +19,15 @@ const Header: React.FC<HeaderProps> = ({ user, handleView, handleLogout }) => {
       >
         Welcome, {user?.user_name}!
       </h2>
-
       <button
-        onClick={handleView}
+        onClick={handleLogout}
         style={{
-          position: "absolute",
-          right: "10%",
-          top: "50%,",
+          bottom: "0",
         }}
       >
-        View My Favorites
+        Logout
       </button>
-
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleView}>View My Favorites</button>
     </div>
   );
 };

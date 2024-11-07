@@ -1,50 +1,94 @@
-# React + TypeScript + Vite
+# Pokemon Game Review Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend repository for Pokemon Game Review Platform.
 
-Currently, two official plugins are available:
+## Table of contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Pokemon Game Review Platform](#pokemon-game-review-platform)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Technology](#technology)
+  - [Component](#component)
+  - [Installation](#installation)
+    - [Clone the Repository](#clone-the-repository)
+    - [Install Dependencies](#install-dependencies)
+    - [Configure Environment Variables](#configure-environment-variables)
+    - [Start the development server](#start-the-development-server)
+  - [Endpoints](#endpoints)
 
-## Expanding the ESLint configuration
+## Overview
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Game List**: Users can add games to their personal library as favorite list.
+- **Game Reviews**: Users can add reviews.
+- **Favorite Games**: Users can mark certain games as favorites.
+- **User Authentication**: Use a basic username/password login, keeping it simple with an option to register or log in. Also protected routes in the backend using Express.js to secure user data.
+- **Responsive UI with React**: Simple, clean UI allowing users to quickly add, review. Use TypeScript in React to type the components and enhance reliability.
+
+---
+
+## Technology
+
+- React
+- TypeScript
+
+---
+
+## Component
+
+- **App**: The main component that manages user state and renders the login/signup or main application views.
+- **Login**: Handles userf login.
+- **SignUp**: Handles user registration.
+- **LogOut**: Handles user logout.
+- **Allgames**: For managing all of the game.
+- **Favorite**: For managing your favorite games as list.
+- **Header**: Displays header ot top page.
+- **Singlegame**: Displays each game and to take you to write your review.
+- **Review**:For writing your review.
+
+---
+
+## Installation
+
+### Clone the Repository
+
+Clone this reposirtory in your local machine.
+
+### Install Dependencies
+
+Install the required dependencies.
+
+```bash
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Configure Environment Variables
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Create a `.env` file in the project directory and add the following variables.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```env
+VITE_API_URL=<your_api_url>
 ```
+
+### Start the development server
+
+```bash
+npm run dev
+```
+
+Then open the Application in your browser.
+
+## Endpoints
+
+- POST/ signup : Sign the user up.
+- POST/ login : Log the user in.
+- POST/ favorites : Mark a Game as Favorite.
+- POST/ reviews : Add the user's review.
+- GET/ games : Show all of the games for user
+- GET/ favorites/:user_id : Get all favorite games for user.
+- GET/ /reviews/:game_id : Fetch All Reviews for a Particular Game
+- DELETE/ favorites/:id : Remove a Game from Favorites

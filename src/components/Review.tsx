@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 interface ReviewProps {
   user: { id: number; user_name: string } | null;
@@ -8,6 +8,7 @@ interface ReviewProps {
 
 const Review: React.FC<ReviewProps> = ({ handleView, saveReview }) => {
   const [reviewText, setReviewText] = useState("");
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleReviewSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -22,6 +23,7 @@ const Review: React.FC<ReviewProps> = ({ handleView, saveReview }) => {
       <h1>Write your review here</h1>
       <form onSubmit={handleReviewSubmit}>
         <textarea
+          ref={textAreaRef}
           value={reviewText}
           onChange={(e) => setReviewText(e.target.value)}
           placeholder="Write your review here"
@@ -31,7 +33,9 @@ const Review: React.FC<ReviewProps> = ({ handleView, saveReview }) => {
         <button
           type="submit"
           className="submit-button"
-          onClick={() => saveReview("Review")}
+          onClick={() =>
+            textAreaRef.current && saveReview(textAreaRef.current.value)
+          }
         >
           Submit Review
         </button>

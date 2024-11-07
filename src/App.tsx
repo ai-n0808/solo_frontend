@@ -27,8 +27,8 @@ function App() {
   const [gamesList, setGamesList] = useState<GameList[]>([]);
   const [selectedGame, setSelectedGame] = useState<null | GameList>(null);
   const [favorites, setFavorites] = useState<GameList[]>([]);
+  const [review, setReviews] = useState([]);
 
-  //Flip the view
   const handleView = (view: string) => {
     setCurrentView(view);
   };
@@ -49,6 +49,7 @@ function App() {
       setCurrentView("AllGames");
       fetchAllGames();
       fetchFavorites();
+      fetchReviews();
     }
   }, [user]);
 
@@ -74,6 +75,38 @@ function App() {
   const handleLogout = () => {
     setUser(null);
     setCurrentView("Login");
+  };
+
+  const handleRemoveFavorite = async (
+    gameId: number,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${apiUrl}/favorites/${gameId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        setFavorites(favorites.filter((game) => game.id !== gameId));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchReviews = async () => {
+    if (selectedGame) {
+      try {
+        const response = await fetch(`${apiUrl}/reviews/${selectedGame}`);
+        const data = await response.json();
+        setReviews(data.reviews);
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
 
   return (
@@ -113,6 +146,7 @@ function App() {
           <Favorite
             favorites={favorites}
             handleView={() => handleView("AllGames")}
+            handleRemoveFavorite={handleRemoveFavorite}
           />
         )}
         {currentView === "Review" && (

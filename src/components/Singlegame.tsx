@@ -30,6 +30,7 @@ const SingleGame: React.FC<SingleGameProps> = ({
       console.error(error);
     }
   };
+
   return (
     <div>
       <h1

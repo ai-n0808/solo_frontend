@@ -5,22 +5,37 @@ import moment from "moment";
 interface FavoriteProps {
   favorites: GameList[];
   handleView: () => void;
+  handleRemoveFavorite: (
+    gameId: number,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => void;
 }
 
-const Favorite: React.FC<FavoriteProps> = ({ favorites, handleView }) => {
+const Favorite: React.FC<FavoriteProps> = ({
+  favorites,
+  handleView,
+  handleRemoveFavorite,
+}) => {
   return (
     <div>
       <h2>Your Favorite Games</h2>
       <ul>
-        {favorites.map((game) => (
-          <li key={game.id}>
-            <h3>{game.title}</h3>
-            <p>Platform: {game.platform}</p>
+        {favorites.map((favorite) => (
+          <li key={favorite.id}>
+            <h3>{favorite.title}</h3>
+            <p>Platform: {favorite.platform}</p>
             <p>
-              Release Date: {moment(game.release_date).format("MMMM Do YYYY")}
+              Release Date:{" "}
+              {moment(favorite.release_date).format("MMMM Do YYYY")}
             </p>
-            <p>Generation: {game.generation}</p>
-            <img src={game.image} />
+            <p>Generation: {favorite.generation}</p>
+            <img src={favorite.image} />
+            <button
+              type="button"
+              onClick={(e) => handleRemoveFavorite(favorite.id, e)}
+            >
+              Remove
+            </button>
           </li>
         ))}
       </ul>

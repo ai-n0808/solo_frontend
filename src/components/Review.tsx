@@ -31,6 +31,9 @@ const Review: React.FC<ReviewProps> = ({ handleView, saveReview }) => {
           style={{ width: "100%", marginBottom: "10px" }}
         />
         <button
+          style={{
+            marginRight: "10px",
+          }}
           type="submit"
           className="submit-button"
           onClick={() =>

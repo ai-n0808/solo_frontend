@@ -1,5 +1,6 @@
 import React from "react";
 import { GameList, ReviewType } from "../App";
+import "../App.css";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 interface SingleGameProps {
@@ -34,8 +35,9 @@ const SingleGame: React.FC<SingleGameProps> = ({
   };
 
   return (
-    <div>
+    <div className="single-game-container">
       <h1
+        className="game-title"
         style={{
           textAlign: "center",
           marginLeft: "50%",
@@ -44,6 +46,7 @@ const SingleGame: React.FC<SingleGameProps> = ({
         {selectedGame?.title}
       </h1>
       <img
+        className="game-image"
         src={selectedGame?.image}
         style={{
           textAlign: "center",
@@ -52,6 +55,7 @@ const SingleGame: React.FC<SingleGameProps> = ({
         }}
       />
       <div
+        className="game-actions"
         style={{
           marginLeft: "50%",
           textAlign: "center",
@@ -64,7 +68,14 @@ const SingleGame: React.FC<SingleGameProps> = ({
         >
           Write your review
         </button>
-        <div className="view-review">
+        <button
+          onClick={() => handleView("AllGames")}
+          style={{ marginLeft: "10px", marginTop: "10px" }}
+        >
+          Back to home
+        </button>
+        <div className="reviews-section">
+          <h2>Reviews</h2>
           {reviews.map((review) => {
             return (
               <div>
@@ -73,12 +84,6 @@ const SingleGame: React.FC<SingleGameProps> = ({
             );
           })}
         </div>
-        <button
-          onClick={() => handleView("AllGames")}
-          style={{ marginLeft: "10px", marginTop: "10px" }}
-        >
-          Back to home
-        </button>
       </div>
     </div>
   );

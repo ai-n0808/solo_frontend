@@ -89,7 +89,7 @@ const Login: React.FC<LoginProps> = ({ handleView, handleSetCurrentUser }) => {
         style={{
           textAlign: "center",
           position: "absolute",
-          left: "45%",
+          left: "50%",
           top: "30%",
         }}
       >

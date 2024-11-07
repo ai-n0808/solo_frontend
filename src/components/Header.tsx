@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ user, handleView, handleLogout }) => {
       <h2
         style={{
           position: "absolute",
-          right: "10%",
+          right: "40%",
         }}
       >
         Welcome, {user?.user_name}!
@@ -27,7 +27,12 @@ const Header: React.FC<HeaderProps> = ({ user, handleView, handleLogout }) => {
       >
         Logout
       </button>
-      <button onClick={handleView}>View My Favorites</button>
+      <button
+        onClick={handleView}
+        style={{ marginLeft: "10px", marginTop: "10px" }}
+      >
+        View My Favorites
+      </button>
     </div>
   );
 };

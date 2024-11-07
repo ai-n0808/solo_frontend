@@ -29,17 +29,21 @@ const Favorite: React.FC<FavoriteProps> = ({
               {moment(favorite.release_date).format("MMMM Do YYYY")}
             </p>
             <p>Generation: {favorite.generation}</p>
-            <img src={favorite.image} />
-            <button
-              type="button"
-              onClick={(e) => handleRemoveFavorite(favorite.id, e)}
-            >
-              Remove
-            </button>
+            <img src={favorite.image} style={{ width: "50%" }} />
+            <div style={{ marginBottom: "50px" }}>
+              <button
+                type="button"
+                onClick={(e) => handleRemoveFavorite(favorite.id, e)}
+              >
+                Remove
+              </button>
+            </div>
           </li>
         ))}
       </ul>
-      <button onClick={() => handleView()}>Back to home</button>
+      <button onClick={() => handleView()} style={{ marginBottom: "10px" }}>
+        Back to home
+      </button>
     </div>
   );
 };

@@ -61,16 +61,21 @@ const SingleGame: React.FC<SingleGameProps> = ({
           textAlign: "center",
         }}
       >
-        <button onClick={() => handleFavorite()}>Add Your Favorite</button>
+        <button
+          onClick={() => handleFavorite()}
+          style={{ height: "40%", marginTop: "10px" }}
+        >
+          Add Your Favorite
+        </button>
         <button
           onClick={() => handleView("Review")}
-          style={{ marginLeft: "10px", marginTop: "10px" }}
+          style={{ marginLeft: "10px", marginTop: "10px", height: "40%" }}
         >
           Write your review
         </button>
         <button
           onClick={() => handleView("AllGames")}
-          style={{ marginLeft: "10px", marginTop: "10px" }}
+          style={{ marginLeft: "10px", marginTop: "10px", height: "40%" }}
         >
           Back to home
         </button>

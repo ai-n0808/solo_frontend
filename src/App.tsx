@@ -19,6 +19,15 @@ export interface GameList {
   image: string;
 }
 
+export interface ReviewType {
+  id: number;
+  user_id: number;
+  game_id: number;
+  rating: number;
+  review: string;
+  created_at: Date;
+}
+
 function App() {
   const [user, setUser] = useState<{ id: number; user_name: string } | null>(
     null
@@ -27,7 +36,7 @@ function App() {
   const [gamesList, setGamesList] = useState<GameList[]>([]);
   const [selectedGame, setSelectedGame] = useState<null | GameList>(null);
   const [favorites, setFavorites] = useState<GameList[]>([]);
-  const [review, setReviews] = useState([]);
+  const [reviews, setReviews] = useState<ReviewType[]>([]);
 
   const handleView = (view: string) => {
     setCurrentView(view);
@@ -52,6 +61,10 @@ function App() {
       fetchReviews();
     }
   }, [user]);
+
+  useEffect(() => {
+    fetchReviews();
+  }, [selectedGame]);
 
   const fetchAllGames = async () => {
     try {
@@ -100,8 +113,9 @@ function App() {
   const fetchReviews = async () => {
     if (selectedGame) {
       try {
-        const response = await fetch(`${apiUrl}/reviews/${selectedGame}`);
+        const response = await fetch(`${apiUrl}/reviews/${selectedGame.id}`);
         const data = await response.json();
+        console.log(data);
         setReviews(data.reviews);
       } catch (error) {
         console.error(error);
@@ -139,6 +153,7 @@ function App() {
           <SingleGame
             selectedGame={selectedGame}
             user={user}
+            reviews={reviews}
             handleView={handleView}
           />
         )}

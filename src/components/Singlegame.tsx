@@ -1,16 +1,18 @@
 import React from "react";
-import { GameList } from "../App";
+import { GameList, ReviewType } from "../App";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 interface SingleGameProps {
   selectedGame: GameList | null;
   user: { id: number; user_name: string } | null;
+  reviews: ReviewType[];
   handleView: (view: string) => void;
 }
 
 const SingleGame: React.FC<SingleGameProps> = ({
   selectedGame,
   user,
+  reviews,
   handleView,
 }) => {
   const handleFavorite = async () => {
@@ -62,6 +64,15 @@ const SingleGame: React.FC<SingleGameProps> = ({
         >
           Write your review
         </button>
+        <div className="view-review">
+          {reviews.map((review) => {
+            return (
+              <div>
+                <p>{review.review}</p>
+              </div>
+            );
+          })}
+        </div>
         <button
           onClick={() => handleView("AllGames")}
           style={{ marginLeft: "10px", marginTop: "10px" }}

@@ -2,10 +2,11 @@ import React, { useState } from "react";
 
 interface ReviewProps {
   user: { id: number; user_name: string } | null;
+  saveReview: (review: string) => void;
   handleView: (view: string) => void;
 }
 
-const Review: React.FC<ReviewProps> = ({ handleView }) => {
+const Review: React.FC<ReviewProps> = ({ handleView, saveReview }) => {
   const [reviewText, setReviewText] = useState("");
 
   const handleReviewSubmit = (event: React.FormEvent) => {
@@ -27,7 +28,11 @@ const Review: React.FC<ReviewProps> = ({ handleView }) => {
           rows={5}
           style={{ width: "100%", marginBottom: "10px" }}
         />
-        <button type="submit" className="submit-button">
+        <button
+          type="submit"
+          className="submit-button"
+          onClick={() => saveReview("Review")}
+        >
           Submit Review
         </button>
         <button onClick={() => handleView("AllGames")}>Back to home</button>

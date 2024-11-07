@@ -123,6 +123,28 @@ function App() {
     }
   };
 
+  const saveReview = async (review: string) => {
+    try {
+      console.log(JSON.stringify(user), JSON.stringify(selectedGame));
+      const response = await fetch(`${apiUrl}/reviews`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: user?.id,
+          game_id: selectedGame?.id,
+          review: review,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to post your review");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <div>
@@ -165,7 +187,7 @@ function App() {
           />
         )}
         {currentView === "Review" && (
-          <Review user={user} handleView={handleView} />
+          <Review user={user} saveReview={saveReview} handleView={handleView} />
         )}
       </div>
     </>
